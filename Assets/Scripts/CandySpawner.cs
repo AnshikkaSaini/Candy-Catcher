@@ -7,11 +7,22 @@ public class CandySpawner : MonoBehaviour
 
     [SerializeField] 
     private float maxX;
-    
+
     [SerializeField]
     private float SpawnInterval;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static CandySpawner instance;
+
+    private void Awake()
+    {
+
+        if (instance == null)
+        {
+
+            instance = this;
+        }
+    }
+
     void Start()
     {
         //SpawnCandy();

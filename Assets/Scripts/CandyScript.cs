@@ -19,15 +19,18 @@ public class CandyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
 
         {
+            GameManager.instance.IncrementScore();  //Incrementing Score
             Destroy(gameObject);
         }
 
         else if (collision.gameObject.CompareTag("Boundary"))
         {
+            GameManager.instance.DecrementLives();  //Decrementing Lives
             Destroy(gameObject);
+
         }
 
-        ;
+
     }
 
 
