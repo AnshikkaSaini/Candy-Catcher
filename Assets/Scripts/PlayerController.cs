@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    bool canMove = true;
+   public  bool canMove = true;
     [SerializeField] float maxPos;
 
 
@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+   public void Update()
     {
         if (canMove)
         {

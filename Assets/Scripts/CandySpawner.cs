@@ -1,11 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CandySpawner : MonoBehaviour
 {
     public GameObject[] Candies;
 
-    [SerializeField] 
+    [SerializeField]
     private float maxX;
 
     [SerializeField]
@@ -13,12 +13,13 @@ public class CandySpawner : MonoBehaviour
 
     public static CandySpawner instance;
 
+    private Coroutine spawnCoroutine;
+
     private void Awake()
     {
 
         if (instance == null)
         {
-
             instance = this;
         }
     }
@@ -26,7 +27,7 @@ public class CandySpawner : MonoBehaviour
     void Start()
     {
         //SpawnCandy();
-        StartSpawningCandies(); 
+        StartSpawningCandies();
     }
 
     void SpawnCandy()
@@ -52,13 +53,31 @@ public class CandySpawner : MonoBehaviour
         }
     }
 
-    public void StartSpawningCandies()
+    /*public void StartSpawningCandies()
     {
         StartCoroutine(SpawnCandies());
     }
     public void StopSpawningCandies()
     {
         StopCoroutine(SpawnCandies());
+    }*/
+
+    public void StartSpawningCandies()
+    {
+        if (spawnCoroutine == null)
+        {
+            spawnCoroutine = StartCoroutine(SpawnCandies());
+        }
     }
 
+    public void StopSpawningCandies()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine); // ✅ Stops the exact running coroutine
+            spawnCoroutine = null; // Reset reference
+            
+
+        }
+    }
 }

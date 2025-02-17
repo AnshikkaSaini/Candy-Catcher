@@ -1,10 +1,13 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject livesHolder;
+    public GameObject gameOverPanel;
+
 
     int score = 0;
     bool gameOver = false;
@@ -15,41 +18,37 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-
-    void Start()
-    {
-
-    }
-
-
-    void Update()
-    {
-
-    }
-
     public void IncrementScore()
     {
-        score++;
-        ScoreText.text = score.ToString();
-       // print(score);
+        if (!gameOver)
+        {
+            score++;
+            ScoreText.text = score.ToString();
+            // print(score);
+        }
     }
 
     public void DecrementLives()
     {
+        lives--;
+        print(lives);
+
+        livesHolder.transform.GetChild(lives).gameObject.SetActive(false);
+
+        if (lives <= 0)
         {
-            lives--;
-            print(lives);   
+            gameOver = true;
+            GameOver();
         }
-        if (lives <=0)
-    {
-        gameOver = true;
-        GameOver();
-     }
-}
- 
-    public void GameOver()
-    {
-        print("Game Over");
     }
 
+    public void GameOver()
+    {
+        CandySpawner.instance.StopSpawningCandies();
+
+        GameObject.Find("Player").GetComponent<PlayerController>().canMove = false;
+
+        gameOverPanel.SetActive(true);
+        print("Game Over");
+    }
 }
