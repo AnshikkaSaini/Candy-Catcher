@@ -1,6 +1,7 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -50,5 +51,16 @@ public class GameManager : MonoBehaviour
 
         gameOverPanel.SetActive(true);
         print("Game Over");
+    }
+
+    public void Restart()
+
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

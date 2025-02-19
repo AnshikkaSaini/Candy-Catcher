@@ -10,6 +10,8 @@ public class MainMenucontroller : MonoBehaviour
 
     public void Exit ()
     {
-        
+        Application.Quit();
     }
+
+   
 }
